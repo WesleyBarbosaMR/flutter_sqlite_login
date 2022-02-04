@@ -1,6 +1,7 @@
 // * Import Libraries
 // * Flutter Libraries
 import 'package:flutter/material.dart';
+import 'package:flutter_sqlite_login/Comm/genTextFormField.dart';
 import 'package:flutter_sqlite_login/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +12,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _conUserId = TextEditingController();
+  final _conPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-          margin: EdgeInsets.all(32.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,77 +47,23 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 5.0),
                 // * User Name Field
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Nome de Usuário',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.account_circle),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conUserId,
+                  hintName: 'Nome de usuário',
+                  icon: Icons.account_circle,
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 5.0),
                 // * Password Field
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Senha',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conPassword,
+                  hintName: 'Senha',
+                  icon: Icons.lock,
+                  isObscureText: true,
                 ),
                 SizedBox(height: 5.0),
                 // * Login Button
                 Container(
-                  padding: EdgeInsets.fromLTRB(26, 5, 26, 2),
-                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 64),
                   child: ElevatedButton(
                     onPressed: () {},
                     child: Row(
@@ -130,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 2.0),
                 // * Toggle Create Account
                 Container(
                   child: Row(

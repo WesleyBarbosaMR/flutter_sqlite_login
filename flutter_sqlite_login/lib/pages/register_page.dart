@@ -1,6 +1,7 @@
 // * Import Libraries
 // * Flutter Libraries
 import 'package:flutter/material.dart';
+import 'package:flutter_sqlite_login/Comm/genTextFormField.dart';
 import 'package:flutter_sqlite_login/pages/login_page.dart';
 
 // * Project Libraries
@@ -13,6 +14,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _conUserId = TextEditingController();
+  final _conUserNm = TextEditingController();
+  final _conEmail = TextEditingController();
+  final _conPass = TextEditingController();
+  final _conPassConf = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +29,6 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-          margin: EdgeInsets.all(32.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,178 +52,46 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(height: 5.0),
                 // * User ID Field
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Nome de Usuário',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.account_circle),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conUserId,
+                  hintName: 'Nome de usuário',
+                  icon: Icons.account_circle,
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 5.0),
                 // * User Name Field
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Nome completo',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.person),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conUserNm,
+                  hintName: 'Nome completo',
+                  icon: Icons.person,
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 5.0),
                 // * Email Field
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.mail_outline),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conEmail,
+                  hintName: 'Email',
+                  icon: Icons.mail_outline,
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 5.0),
                 // * Password Field
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Senha',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conPass,
+                  hintName: 'Senha',
+                  icon: Icons.lock,
+                  isObscureText: true,
                 ),
                 SizedBox(height: 5.0),
                 // * Confirm Password Field
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Confirmação de senha',
-
-                    // * Input Decoration
-                    // * Field Icons
-                    prefixIcon: Icon(Icons.lock_outline),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                    // * BG Decoration
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                    // * Border Decoration
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.lightGreen),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30.0),
-                      ),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                getTextFormField(
+                  controller: _conPassConf,
+                  hintName: 'Confirmação de senha',
+                  icon: Icons.lock_outline,
+                  // Refeito
+                  isObscureText: true,
                 ),
                 SizedBox(height: 5.0),
                 // * Register Button
                 Container(
-                  padding: EdgeInsets.fromLTRB(26, 5, 26, 2),
-                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 64),
                   child: ElevatedButton(
                     onPressed: () {},
                     child: Row(
@@ -233,6 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 2.0),
                 // * Toggle Create Account
                 Container(
                   child: Row(
