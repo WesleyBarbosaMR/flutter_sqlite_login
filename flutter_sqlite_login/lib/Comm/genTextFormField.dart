@@ -1,18 +1,22 @@
 // * Import Libraries
 // * Flutter Libraries
 import 'package:flutter/material.dart';
+import 'package:flutter_sqlite_login/Comm/comHelper.dart';
 
 class getTextFormField extends StatelessWidget {
   late TextEditingController controller;
   late String hintName;
   late IconData icon;
   late bool isObscureText;
+  late TextInputType inputType;
 
-  getTextFormField(
-      {required this.controller,
-      required this.hintName,
-      required this.icon,
-      this.isObscureText = false});
+  getTextFormField({
+    required this.controller,
+    required this.hintName,
+    required this.icon,
+    this.isObscureText = false,
+    this.inputType = TextInputType.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,21 @@ class getTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         obscureText: isObscureText,
+        keyboardType: inputType,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Insira o(a) $hintName';
+          }
+
+          if (hintName == 'Email' && !validateEmail(value)) {
+            return 'Formato de email inválido!';
+          }
+
+          return null;
+        },
+        onSaved: (val) => controller.text = val!,
         decoration: InputDecoration(
+          labelText: hintName,
           hintText: hintName,
 
           // * Input Decoration
